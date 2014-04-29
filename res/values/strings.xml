@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OneHand Mode</string>
+    <string name="title_activity_main">One-Handed Mode</string>
+    <string name="master_switch">Master Switch</string>
+    <string name="left_margin">Left Margin</string>
+    <string name="right_margin">Right Margin</string>
+    <string name="top_margin">Top Margin</string>
+    <string name="bottom_margin">Bottom Margin</string>
+    <string name="info">One-Handed mode works by putting margins around the screen. Please specifiy your prefered margins below in pixels</string>
+    <string name="apply">Apply</string>
+    <string name="menu_hint">Press Menu for more options</string>
+    <string name="title_activity_help">Help</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="help">One-Handed mode allows you to move all the screen content to one corner of the screen, for easy operation with one hand. This works by putting margins around the screen. If you wanted everything in the bottom right quarter, on a 1080x1920 screen, you would specifiy the top margin as 960 and left as 540 so the screen content would start in the very middle of the screen.</string>
+
+</resources>

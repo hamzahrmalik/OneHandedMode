@@ -1,0 +1,100 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="405dp"
+        android:orientation="vertical" >
+
+    <Switch
+        android:id="@+id/master_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/master_switch" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/master_switch"
+        android:layout_below="@+id/master_switch"
+        android:layout_marginTop="14dp"
+        android:text="@string/info"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/left_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:hint="@string/left_margin"
+        android:inputType="number" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/top_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/right_margin"
+        android:layout_alignRight="@+id/right_margin"
+        android:layout_below="@+id/right_margin"
+        android:ems="10"
+        android:hint="@string/top_margin"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/right_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/left_margin"
+        android:layout_alignRight="@+id/left_margin"
+        android:layout_below="@+id/left_margin"
+        android:ems="10"
+        android:hint="@string/right_margin"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/bottom_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/top_margin"
+        android:layout_alignRight="@+id/top_margin"
+        android:layout_below="@+id/top_margin"
+        android:ems="10"
+        android:hint="@string/bottom_margin"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bottom_margin"
+        android:layout_alignRight="@+id/bottom_margin"
+        android:layout_below="@+id/bottom_margin"
+        android:text="@string/apply"
+        android:onClick="apply" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/menu_hint"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
+
+</ScrollView>
