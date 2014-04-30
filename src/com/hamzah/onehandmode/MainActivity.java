@@ -1,12 +1,18 @@
 package com.hamzah.onehandmode;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,11 +33,18 @@ public class MainActivity extends Activity {
 	int right_margin = 0;
 	int top_margin = 0;
 	int bottom_margin = 0;
+	//used to make sure the user doesnt do something stupid
+	int screen_width = 0;
+	int screen_height = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        if(getIntent().getExtras()!=null){
+            Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();
+        }
         
         switch_master_switch= (Switch) findViewById(R.id.master_switch);
     	ET_left_margin= (EditText) findViewById(R.id.left_margin);
@@ -39,7 +52,28 @@ public class MainActivity extends Activity {
     	ET_top_margin= (EditText) findViewById(R.id.top_margin);
     	ET_bottom_margin= (EditText) findViewById(R.id.bottom_margin);
     	
+    	Display display = getWindowManager().getDefaultDisplay();
+    	Point size = new Point();
+    	display.getSize(size);
+    	screen_width = size.x;
+    	screen_height = size.y;
+    	Log.d("SCREEN SIZE", screen_width  + ", " + screen_height);
     	loadPreviousSettings();
+    	
+    	Intent intent = new Intent(this, NotificationTap.class);
+        PendingIntent pIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
+        
+    	@SuppressWarnings("deprecation")
+		Notification mNotification = new Notification.Builder(this)
+        .setContentTitle("One-Handed Mode")
+        .setContentText("Touch to toggle")
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentIntent(pIntent)
+        .setOngoing(true)
+        .getNotification();
+    	
+    	NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    	notificationManager.notify(0, mNotification);
     }
     
     @SuppressWarnings("deprecation") //cos of world readable
@@ -62,6 +96,10 @@ public class MainActivity extends Activity {
     	editor.apply();
     	
     	Toast.makeText(this, "Changes applied!", Toast.LENGTH_SHORT).show();
+    	if(left_margin-right_margin<screen_width*0.6||top_margin-bottom_margin<screen_height*0.6)
+    		Toast.makeText(this, "Warning, the view area may be too small!", Toast.LENGTH_LONG).show();
+    	if(left_margin>screen_width||top_margin>screen_height||right_margin<0||bottom_margin<0)
+    		Toast.makeText(this, "Your view area goes off the screen!", Toast.LENGTH_LONG).show();
     }
     //get the previous settings from the pref and load them into input widgets
     @SuppressWarnings("deprecation")
