@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -41,10 +42,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        if(getIntent().getExtras()!=null){
-            Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();
-        }
         
         switch_master_switch= (Switch) findViewById(R.id.master_switch);
     	ET_left_margin= (EditText) findViewById(R.id.left_margin);
