@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hamzah.onehandmode"
-    android:versionCode="4"
-    android:versionName="1.3" >
+    android:versionCode="5"
+    android:versionName="1.4" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -28,7 +28,6 @@
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -38,8 +37,7 @@
         </activity>
         <activity
             android:name="com.hamzah.onehandmode.NotificationTap"
-            android:label="@string/title_activity_notification_tap"
-            android:noHistory="true" >
+            android:label="@string/title_activity_notification_tap">
         </activity>
     </application>
 

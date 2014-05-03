@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.widget.Toast;
 
 public class NotificationTap extends Activity {
+	//this activity simply handles the notification icon click
+	//it just toggles one hand mode
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

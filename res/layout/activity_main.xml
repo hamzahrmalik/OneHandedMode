@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="578dp"
+        android:layout_height="542dp"
         android:orientation="vertical" >
 
     <Switch
@@ -92,16 +92,6 @@
         android:layout_marginTop="52dp"
         android:text="@string/NotificationOption" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="32dp"
-        android:onClick="apply"
-        android:text="@string/apply" />
-
     <CheckBox
         android:id="@+id/leaveActionbar"
         android:layout_width="wrap_content"
@@ -109,6 +99,16 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/showNotification"
         android:text="@string/KeepActionbar" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/leaveActionbar"
+        android:onClick="apply"
+        android:text="@string/apply" />
 
 </RelativeLayout>
 
