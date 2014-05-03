@@ -1,14 +1,13 @@
 package com.hamzah.onehandmode;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.view.View;
+import android.view.Window;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 public class Main implements IXposedHookLoadPackage, IXposedHookZygoteInit{
@@ -25,12 +24,25 @@ public class Main implements IXposedHookLoadPackage, IXposedHookZygoteInit{
 				final int right_margin = pref.getInt(Keys.RIGHT_MARGIN, 0);
 				final int top_margin = pref.getInt(Keys.TOP_MARGIN, 0);
 				final int bottom_margin = pref.getInt(Keys.BOTTOM_MARGIN, 0);
+				final boolean leaveActionbar = pref.getBoolean(Keys.LEAVE_ACTIONBAR, false);
 				
 				Activity activity = (Activity) param.thisObject;
 				View rootLayer = activity.getWindow().getDecorView()
 						.findViewById(android.R.id.content);
-				if(pref.getBoolean(Keys.MASTER_SWITCH, false))
-				rootLayer.setPadding(left_margin, top_margin, right_margin, bottom_margin);
+				
+				Window window = activity.getWindow();
+			    View v = window.getDecorView();
+			    int resId = activity.getResources().getIdentifier("action_bar_container", "id", "android");
+			    View actionBar = v.findViewById(resId);			    
+			    
+				if(pref.getBoolean(Keys.MASTER_SWITCH, false)){
+					if(actionBar==null||leaveActionbar)
+						rootLayer.setPadding(left_margin, top_margin, right_margin, bottom_margin);
+					else
+						rootLayer.setPadding(left_margin, 0, right_margin, bottom_margin);
+				if(!leaveActionbar)
+				actionBar.setPadding(left_margin, top_margin, right_margin, 0);
+				}
 			}
 		});
 		}

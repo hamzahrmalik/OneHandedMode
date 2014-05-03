@@ -17,5 +17,7 @@
     <string name="help">One-Handed mode allows you to move all the screen content to one corner of the screen, for easy operation with one hand. This works by putting margins around the screen. If you wanted everything in the bottom right quarter, on a 1080x1920 screen, you would specifiy the top margin as 960 and left as 540 so the screen content would start in the very middle of the screen.</string>
     <string name="title_activity_widget">Widget</string>
     <string name="title_activity_notification_tap">NotificationTap</string>
+    <string name="NotificationOption">Show notification for toggling</string>
+    <string name="KeepActionbar">Leave actionbar in normal position</string>
 
 </resources>

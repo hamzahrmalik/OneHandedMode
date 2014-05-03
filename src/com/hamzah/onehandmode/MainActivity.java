@@ -16,38 +16,44 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	//the widgets, ya know
 	public static Switch switch_master_switch;
+	public static Switch switch_show_notification;
 	public static EditText ET_left_margin;
 	public static EditText ET_right_margin;
 	public static EditText ET_top_margin;
 	public static EditText ET_bottom_margin;
+	public static CheckBox CB_leave_actionbar;
 	
 	boolean master_switch = false;
+	boolean show_notification = true;
 	int left_margin = 0;
 	int right_margin = 0;
 	int top_margin = 0;
 	int bottom_margin = 0;
+	boolean leave_actionbar;
 	//used to make sure the user doesnt do something stupid
 	int screen_width = 0;
 	int screen_height = 0;
-
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
         switch_master_switch= (Switch) findViewById(R.id.master_switch);
+        switch_show_notification = (Switch) findViewById(R.id.showNotification);
     	ET_left_margin= (EditText) findViewById(R.id.left_margin);
     	ET_right_margin= (EditText) findViewById(R.id.right_margin);
     	ET_top_margin= (EditText) findViewById(R.id.top_margin);
     	ET_bottom_margin= (EditText) findViewById(R.id.bottom_margin);
+    	CB_leave_actionbar= (CheckBox) findViewById(R.id.leaveActionbar);
     	
     	Display display = getWindowManager().getDefaultDisplay();
     	Point size = new Point();
@@ -57,10 +63,16 @@ public class MainActivity extends Activity {
     	Log.d("SCREEN SIZE", screen_width  + ", " + screen_height);
     	loadPreviousSettings();
     	
+    	initNotification();
+    }
+    
+    @SuppressWarnings("deprecation")
+	public void initNotification(){
     	Intent intent = new Intent(this, NotificationTap.class);
         PendingIntent pIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
         
-    	@SuppressWarnings("deprecation")
+        SharedPreferences pref = getSharedPreferences("pref", Context.MODE_WORLD_READABLE);
+        if(pref.getBoolean(Keys.SHOW_NOTIFICATION, true)){
 		Notification mNotification = new Notification.Builder(this)
         .setContentTitle("One-Handed Mode")
         .setContentText("Touch to toggle")
@@ -71,26 +83,32 @@ public class MainActivity extends Activity {
     	
     	NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     	notificationManager.notify(0, mNotification);
+        }
     }
     
     @SuppressWarnings("deprecation") //cos of world readable
 	public void apply(View v){
     	// read raw values from the input widgets
     	master_switch = switch_master_switch.isChecked();
+    	show_notification = switch_show_notification.isChecked();
     	left_margin = Integer.parseInt(ET_left_margin.getText().toString());
     	right_margin = Integer.parseInt(ET_right_margin.getText().toString());
     	top_margin = Integer.parseInt(ET_top_margin.getText().toString());
     	bottom_margin = Integer.parseInt(ET_bottom_margin.getText().toString());
+    	leave_actionbar = CB_leave_actionbar.isChecked();
     	
     	//save the values
     	SharedPreferences pref = getSharedPreferences("pref", Context.MODE_WORLD_READABLE);
     	Editor editor = pref.edit();
     	editor.putBoolean(Keys.MASTER_SWITCH, master_switch);
+    	editor.putBoolean(Keys.SHOW_NOTIFICATION, show_notification);
     	editor.putInt(Keys.LEFT_MARGIN, left_margin);
     	editor.putInt(Keys.RIGHT_MARGIN, right_margin);
     	editor.putInt(Keys.TOP_MARGIN, top_margin);
     	editor.putInt(Keys.BOTTOM_MARGIN, bottom_margin);
+    	editor.putBoolean(Keys.LEAVE_ACTIONBAR, leave_actionbar);
     	editor.apply();
+    	initNotification();
     	
     	Toast.makeText(this, "Changes applied!", Toast.LENGTH_SHORT).show();
     	if(left_margin-right_margin<screen_width*0.6||top_margin-bottom_margin<screen_height*0.6)
@@ -103,10 +121,12 @@ public class MainActivity extends Activity {
 	public void loadPreviousSettings(){
     	SharedPreferences pref = getSharedPreferences("pref", Context.MODE_WORLD_READABLE);
     	switch_master_switch.setChecked(pref.getBoolean(Keys.MASTER_SWITCH, true));
+     	switch_show_notification.setChecked(pref.getBoolean(Keys.SHOW_NOTIFICATION, true));
     	ET_left_margin.setText(Integer.toString(pref.getInt(Keys.LEFT_MARGIN, 0)));
     	ET_right_margin.setText(Integer.toString(pref.getInt(Keys.RIGHT_MARGIN, 0)));
     	ET_top_margin.setText(Integer.toString(pref.getInt(Keys.TOP_MARGIN, 0)));
     	ET_bottom_margin.setText(Integer.toString(pref.getInt(Keys.BOTTOM_MARGIN, 0)));
+    	CB_leave_actionbar.setChecked(pref.getBoolean(Keys.LEAVE_ACTIONBAR, false));
     }
     
     @Override
