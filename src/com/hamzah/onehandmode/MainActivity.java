@@ -1,161 +1,216 @@
 package com.hamzah.onehandmode;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	//the widgets, ya know
-	public static Switch switch_master_switch;
-	public static Switch switch_show_notification;
-	public static EditText ET_left_margin;
-	public static EditText ET_right_margin;
-	public static EditText ET_top_margin;
-	public static EditText ET_bottom_margin;
-	public static CheckBox CB_leave_actionbar;
-	
+	 Switch switch_master_switch;
+	 EditText ET_left_margin, ET_right_margin, ET_top_margin, ET_bottom_margin;
+	 CheckBox CB_leave_actionbar;//, CB_move_statusbar;
+	 Spinner spinner_presets;
+	//settings
 	boolean master_switch = false;
-	boolean show_notification = true;
 	int left_margin = 0;
 	int right_margin = 0;
 	int top_margin = 0;
 	int bottom_margin = 0;
-	boolean leave_actionbar;
+	boolean leave_actionbar = false;
+	boolean move_statusbar = true;
 	//used to make sure the user doesnt do something stupid
 	int screen_width = 0;
 	int screen_height = 0;
 	
-    @Override
+	SharedPreferences pref;
+	
+	Preset bottom_right, bottom_left, bottom_right_big, bottom_left_big, bottom_middle, squash_down;
+	
+    @SuppressWarnings("deprecation")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        switch_master_switch= (Switch) findViewById(R.id.master_switch);
-        switch_show_notification = (Switch) findViewById(R.id.showNotification);
+        pref = getSharedPreferences("apps", Context.MODE_WORLD_READABLE);
+        
+        switch_master_switch= (Switch) findViewById(R.id.master_switch_apps);
+        
     	ET_left_margin= (EditText) findViewById(R.id.left_margin);
     	ET_right_margin= (EditText) findViewById(R.id.right_margin);
     	ET_top_margin= (EditText) findViewById(R.id.top_margin);
     	ET_bottom_margin= (EditText) findViewById(R.id.bottom_margin);
     	CB_leave_actionbar= (CheckBox) findViewById(R.id.leaveActionbar);
+    	//CB_move_statusbar = (CheckBox) findViewById(R.id.move_statusbar);
+    	
+    	spinner_presets = (Spinner) findViewById(R.id.presets_apps);
     	
     	Display display = getWindowManager().getDefaultDisplay();
     	Point size = new Point();
     	display.getSize(size);
     	screen_width = size.x;
     	screen_height = size.y;
-    	Log.d("SCREEN SIZE", screen_width  + ", " + screen_height);
+    	//Log.d("SCREEN SIZE", screen_width  + ", " + screen_height);
+    	
+    	initPresets();
+    	
+    	spinner_presets.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				choosePreset(position);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				
+			}
+    	});
+    	
     	loadPreviousSettings();
-    	
-    	initNotification();
     }
     
-    @SuppressWarnings("deprecation")
-	public void initNotification(){
-    	Intent intent = new Intent(this, NotificationTap.class);
-        PendingIntent pIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-        
-        SharedPreferences pref = getSharedPreferences("pref", Context.MODE_WORLD_READABLE);
-        if(pref.getBoolean(Keys.SHOW_NOTIFICATION, true)){
-		Notification mNotification = new Notification.Builder(this)
-        .setContentTitle("One-Handed Mode")
-        .setContentText("Touch to toggle")
-        .setSmallIcon(R.drawable.ic_launcher)
-        .setContentIntent(pIntent)
-        .setOngoing(true)
-        .getNotification();
-    	
-    	NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-    	notificationManager.notify(0, mNotification);
-        }
+    public void initPresets(){
+    	bottom_right = new Preset(1, screen_width*0.3, 0, screen_height*0.3, 0);
+    	bottom_left = new Preset(2, 0, screen_width*0.3, screen_height*0.3, 0);
+    	bottom_right_big = new Preset(3, screen_width*0.1, 0, screen_height*0.1, 0);
+    	bottom_left_big = new Preset(4, 0, screen_width*0.1, screen_height*0.1, 0);
+    	bottom_middle = new Preset(5, screen_width*0.1, screen_width*0.1, screen_height*0.2, 0);
+    	squash_down = new Preset(6, 0, 0, screen_height*0.25, 0);
     }
     
-    @SuppressWarnings("deprecation") //cos of world readable
+    public Preset presetById(int id){
+    	Preset p = null;
+    	if(id==1)
+    		p = bottom_right;
+    	else if(id==2)
+    		p = bottom_left;
+    	else if(id==3)
+    		p = bottom_right_big;
+    	else if(id==4)
+    		p = bottom_left_big;
+    	else if(id==5)
+    		p = bottom_middle;
+    	else if(id==6)
+    		p = squash_down;
+    	
+    	return p;
+    }
+    
+    public void choosePreset(int id){
+    	Preset chosen = presetById(id);
+    	if(id!=0){
+    	ET_left_margin.setText(Integer.toString((int) chosen.getLeft()));
+    	ET_right_margin.setText(Integer.toString((int) chosen.getRight()));
+    	ET_top_margin.setText(Integer.toString((int) chosen.getTop()));
+    	ET_bottom_margin.setText(Integer.toString((int) chosen.getBottom()));
+    	}
+    }
+    
 	public void apply(View v){
     	// read raw values from the input widgets
     	master_switch = switch_master_switch.isChecked();
-    	show_notification = switch_show_notification.isChecked();
     	left_margin = Integer.parseInt(ET_left_margin.getText().toString());
     	right_margin = Integer.parseInt(ET_right_margin.getText().toString());
     	top_margin = Integer.parseInt(ET_top_margin.getText().toString());
     	bottom_margin = Integer.parseInt(ET_bottom_margin.getText().toString());
     	leave_actionbar = CB_leave_actionbar.isChecked();
+    //	move_statusbar = CB_move_statusbar.isChecked();
     	
-    	//save the values
-    	SharedPreferences pref = getSharedPreferences("pref", Context.MODE_WORLD_READABLE);
+    	//check for bad margins
+    	int viewH = (screen_height-top_margin-bottom_margin);
+    	int viewW = screen_width-left_margin-right_margin;
+    	
+    	String message = null;
+    	
+    	if(viewW<screen_width*0.5||viewH<screen_height*0.5)
+    		message = "The view area is less than half your screen. It may be too small. Are you sure you want to save?";
+    	else if(left_margin>screen_width||top_margin>screen_height||right_margin<0||bottom_margin<0)
+    		message = "The view area does not fit on the screen. Are you sure you want to apply?";
+    	else
+    		save();
+    	
+    	if(message!=null){
+    		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    		alert.setTitle("Warning");
+    		alert.setMessage(message);
+    	}
+    	
+    	finish();
+    }
+	
+	public void save(){
+		//save the values
     	Editor editor = pref.edit();
     	editor.putBoolean(Keys.MASTER_SWITCH, master_switch);
-    	editor.putBoolean(Keys.SHOW_NOTIFICATION, show_notification);
     	editor.putInt(Keys.LEFT_MARGIN, left_margin);
     	editor.putInt(Keys.RIGHT_MARGIN, right_margin);
     	editor.putInt(Keys.TOP_MARGIN, top_margin);
     	editor.putInt(Keys.BOTTOM_MARGIN, bottom_margin);
     	editor.putBoolean(Keys.LEAVE_ACTIONBAR, leave_actionbar);
+    	editor.putBoolean(Keys.MOVE_STATUSBAR, move_statusbar);
     	editor.apply();
-    	initNotification();
     	
-    	Toast.makeText(this, "Changes applied!", Toast.LENGTH_SHORT).show();
-    	if(left_margin-right_margin<screen_width*0.6||top_margin-bottom_margin<screen_height*0.6)
-    		Toast.makeText(this, "Warning, the view area may be too small!", Toast.LENGTH_LONG).show();
-    	if(left_margin>screen_width||top_margin>screen_height||right_margin<0||bottom_margin<0)
-    		Toast.makeText(this, "Your view area goes off the screen!", Toast.LENGTH_LONG).show();
-    }
+    	Toast.makeText(this, "Changes applied!", Toast.LENGTH_SHORT).show();	
+	}
     //get the previous settings from the pref and load them into input widgets
-    @SuppressWarnings("deprecation")
 	public void loadPreviousSettings(){
-    	SharedPreferences pref = getSharedPreferences("pref", Context.MODE_WORLD_READABLE);
+		int left = pref.getInt(Keys.LEFT_MARGIN, 0);
+		int right = pref.getInt(Keys.RIGHT_MARGIN, 0);
+		int top = pref.getInt(Keys.TOP_MARGIN, 0);
+		int bottom = pref.getInt(Keys.BOTTOM_MARGIN, 0);
     	switch_master_switch.setChecked(pref.getBoolean(Keys.MASTER_SWITCH, true));
-     	switch_show_notification.setChecked(pref.getBoolean(Keys.SHOW_NOTIFICATION, true));
-    	ET_left_margin.setText(Integer.toString(pref.getInt(Keys.LEFT_MARGIN, 0)));
-    	ET_right_margin.setText(Integer.toString(pref.getInt(Keys.RIGHT_MARGIN, 0)));
-    	ET_top_margin.setText(Integer.toString(pref.getInt(Keys.TOP_MARGIN, 0)));
-    	ET_bottom_margin.setText(Integer.toString(pref.getInt(Keys.BOTTOM_MARGIN, 0)));
+    	ET_left_margin.setText(Integer.toString(left));
+    	ET_right_margin.setText(Integer.toString(right));
+    	ET_top_margin.setText(Integer.toString(top));
+    	ET_bottom_margin.setText(Integer.toString(bottom));
     	CB_leave_actionbar.setChecked(pref.getBoolean(Keys.LEAVE_ACTIONBAR, false));
+    //	CB_move_statusbar.setChecked(pref.getBoolean(Keys.MOVE_STATUSBAR, true));
+    	setPreset(left, right, top, bottom);
     }
-    
-    @Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()){
-		case R.id.menu_help:
-			openHelp();
-			break;
-		case R.id.menu_xda:
-			openXDA();
-			break;
+	
+	public Preset checkPreset(int left, int right, int top, int bottom){
+		Preset p = null;
+		if(left==bottom_right.getLeft()&&right==bottom_right.getRight()&&top==bottom_right.getTop()&&bottom==bottom_right.getBottom())
+			p=bottom_right;
+		
+		else if(left==bottom_left.getLeft()&&right==bottom_left.getRight()&&top==bottom_left.getTop()&&bottom==bottom_left.getBottom())
+			p=bottom_left;
+		
+		else if(left==bottom_right_big.getLeft()&&right==bottom_right_big.getRight()&&top==bottom_right_big.getTop()&&bottom==bottom_right_big.getBottom())
+			p=bottom_right_big;
+		
+		else if(left==bottom_left_big.getLeft()&&right==bottom_left_big.getRight()&&top==bottom_left_big.getTop()&&bottom==bottom_left_big.getBottom())
+			p=bottom_left_big;
+		
+		else if(left==bottom_middle.getLeft()&&right==bottom_middle.getRight()&&top==bottom_middle.getTop()&&bottom==bottom_middle.getBottom())
+			p=bottom_middle;
+		
+		else if(left==squash_down.getLeft()&&right==squash_down.getRight()&&top==squash_down.getTop()&&bottom==squash_down.getBottom())
+			p=squash_down;
+		
+		return p;
+	}
+	
+	public void setPreset(int left, int right, int top, int bottom){
+		Preset p = checkPreset(left, right, top, bottom);
+		if(p!=null){
+			spinner_presets.setSelection(p.getId());
+			//Toast.makeText(this, "" + p.getId(), Toast.LENGTH_SHORT).show();
 		}
-		return true;
-    }
-    
-    public void openHelp(){
-    	Intent intent = new Intent(this, Help.class);
-		startActivity(intent);
-    }
-    
-    public void openXDA(){
-    	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://forum.xda-developers.com/xposed/modules/mod-one-handed-mode-devices-t2735815/post52293457"));
-		startActivity(browserIntent);
-    }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-    
+	}
 }

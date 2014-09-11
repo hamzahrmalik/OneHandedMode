@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="ButtonStyle">
+        <ignore path="res/layout/widget.xml" />
+    </issue>
+    <issue id="SdCardPath" severity="ignore" />
     <issue id="WorldReadableFiles" severity="ignore" />
 </lint>

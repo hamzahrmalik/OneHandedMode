@@ -1,23 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- titles -->
     <string name="app_name">OneHand Mode</string>
-    <string name="title_activity_main">One-Handed Mode</string>
+    <string name="title_activity_main">Settings for Apps</string>
+    <string name="title_activity_help">Help</string>
+    <string name="title_activity_notification_tap">OneHand Toggle</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_notification_centre">Settings for Notification Centre</string>
+    <string name="title_activity_report">Report</string>
+    <string name="title_activity_about">About</string>
+
+    <!-- masters -->
     <string name="master_switch">Master Switch</string>
+    <string name="master_switch_apps">Enable OneHand Mode for apps</string>
+    <string name="master_switch_NC">Enable OneHand Mode for Notification Centre</string>
+
+    <!-- margins -->
     <string name="left_margin">Left Margin</string>
     <string name="right_margin">Right Margin</string>
     <string name="top_margin">Top Margin</string>
     <string name="bottom_margin">Bottom Margin</string>
-    <string name="info">One-Handed mode works by putting margins around the screen. Please specifiy your prefered margins below in pixels</string>
-    <string name="apply">Apply</string>
-    <string name="menu_hint">Press Menu for more options</string>
-    <string name="title_activity_help">Help</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="help">One-Handed mode allows you to move all the screen content to one corner of the screen, for easy operation with one hand. This works by putting margins around the screen. If you wanted everything in the bottom right quarter, on a 1080x1920 screen, you would specifiy the top margin as 960 and left as 540 so the screen content would start in the very middle of the screen.</string>
-    <string name="title_activity_widget">Widget</string>
-    <string name="title_activity_notification_tap">OneHand Toggle</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="top">Top</string>
+    <string name="bottom">Bottom</string>
+
+    <!-- options -->
     <string name="NotificationOption">Show notification for toggling</string>
     <string name="KeepActionbar">Leave actionbar in normal position</string>
+    <string name="show_toast">Show Toast when toggling</string>
+    <string name="trans_notif">Transparent Notification Icon</string>
+    <string name="moveNotif">Move Notification Center</string>
+    <string name="activity_toggle_option">What should the Toggle Activity toggle?</string>
+
+    <!-- menu items and actions -->
+    <string name="report">Report a problem</string>
+    <string name="XDA">Visit XDA Thread</string>
+    <string name="save">Save</string>
+    <string name="apply">Apply</string>
+    <string name="twitter">\@hamzahrmalik on Twitter</string>
+    <string name="website">Visit my website!</string>
+    <string name="email">hamzahrmalik@outlook.com</string>
+    <string name="generate_log">Generate log file</string>
+    <string name="buyPrem">Buy premium from Google Play</string>
+
+    <!-- toggle names -->
+    <string name="toggle_apps">Apps</string>
+    <string name="toggle_NC">NC</string>
+    <string name="toggle_both">Both</string>
+
+    <!-- info and welcomes -->
+    <string name="info">One-Handed mode works by putting margins around the screen. Please specifiy your preferred margins below in pixels</string>
+    <string name="welcome">Welcome to One Hand Mode. Please select an item</string>
+    <string name="report_info">The button below will generate a file onto your phones memory. This file will contain a log and your phone and ROM names. You can send me this file either by email or on the XDA thread. Email address is:</string>
+    <string name="wait">Please Wait</string>
+    <string name="Presets_info">Optionally, choose a ready made preset</string>
+    <string name="info_notificationCenter">Specifiy margins for Notification Centre</string>
+    <string name="report_info_2">Use this screen to report a problem with the app. Please make sure you have read both the help page and the XDA thread first</string>
+
+    <!-- help and about -->
+    <string name="help">One-Handed mode allows you to move all the screen content to one corner of the screen, for easy operation with one hand. This works by putting margins around the screen. For example, setting a left margin of 50 will indent everything 50px. You can use a preset if you prefer.\n There are separate settings pages for "Apps" and "Notification Centre" margins\n\nTerminology\n
+        Notification Centre - The panel that appears when swiping down from statusbar\n
+        Statusbar - The black bar across the top of the screen containing clock, battery, signal etc\n
+        Actionbar - A bar found in most apps, contains title and key controls. On this app, it is black, and says "Help" right now\n
+        XDA - An awesome forum</string>
+    <string name="about">This app was made and is maintained by @hamzahrmalik on XDA. If you like the app, please rate it on the Play Store to help me out! If you really like it, buy the premium version!</string>
+
+    <!-- arrays -->
+    <string-array name="presets">
+        <item name="none">None</item>
+        <item name="bottom_right">Bottom Right</item>
+        <item name="bottom_left">Bottom Left</item>
+        <item name="bottom_right_big">Bottom Right Big</item>
+        <item name="bottom_left_big">Bottom Left Big</item>
+        <item name="bottom_middle">Bottom Middle</item>
+        <item name="squash_down">Squash down</item>
+    </string-array>
+    <string-array name="toggle_option">
+        <item name="apps">Apps</item>
+        <item name="NC">Notification Centre</item>
+        <item name="both">Both</item>
+    </string-array>
 
 </resources>

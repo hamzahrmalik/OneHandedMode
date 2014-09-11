@@ -5,36 +5,55 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.Toast;
 
 public class NotificationTap extends Activity {
-	//this activity simply handles the notification icon click
-	//it just toggles one hand mode
+	
+	String [] toggle_names = {"Apps", "Notification Centre", "Both"};
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_notification_tap);
+		
 		@SuppressWarnings("deprecation")
 		SharedPreferences pref = getSharedPreferences("pref", Context.MODE_WORLD_READABLE);
-		Editor edit = pref.edit();
-		if(pref.getBoolean(Keys.MASTER_SWITCH, false)){
-			Toast.makeText(this, "Disabled One-Hand Mode", Toast.LENGTH_SHORT).show();
-    		edit.putBoolean(Keys.MASTER_SWITCH, false);
-		}
-		else{
-			Toast.makeText(this, "Enabled One-Hand Mode", Toast.LENGTH_SHORT).show();
-			edit.putBoolean(Keys.MASTER_SWITCH, true);
-		}
-		edit.apply();
+		
+		int id = getIntent().getIntExtra(Keys.INTENT_DATA, pref.getInt(Keys.DEFAULT_TOGGLE, 2));
+		toggle(id);
+		if(pref.getBoolean(Keys.SHOW_TOGGLE_TOAST, true))
+			Toast.makeText(this, "Toggled One-Hand Mode for " + toggle_names[id], Toast.LENGTH_SHORT).show();
 		finish();
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.notification_tap, menu);
-		return true;
+	
+	public void toggle(int id){
+		if(id==Keys.INTENT_TOGGLE_APPS)
+			toggleApps();
+		else if(id==Keys.INTENT_TOGGLE_NC)
+			toggleNC();
+		else if(id==Keys.INTENT_TOGGLE_BOTH)
+			toggleBoth();
 	}
-
+	
+	public void toggleApps(){
+		@SuppressWarnings("deprecation")
+		SharedPreferences pref = getSharedPreferences("apps", Context.MODE_WORLD_READABLE);
+		Editor editor = pref.edit();
+		editor.putBoolean(Keys.MASTER_SWITCH, !pref.getBoolean(Keys.MASTER_SWITCH, false));
+		editor.apply();
+	}
+	
+	public void toggleNC(){
+		@SuppressWarnings("deprecation")
+		SharedPreferences pref = getSharedPreferences("NC", Context.MODE_WORLD_READABLE);
+		Editor editor = pref.edit();
+		editor.putBoolean(Keys.MASTER_SWITCH, !pref.getBoolean(Keys.MASTER_SWITCH, false));
+		editor.apply();
+	}
+	
+	public void toggleBoth(){
+		toggleApps();
+		toggleNC();
+	}
 }
