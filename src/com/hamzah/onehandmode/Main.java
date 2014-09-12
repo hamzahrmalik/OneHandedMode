@@ -2,6 +2,8 @@ package com.hamzah.onehandmode;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -82,6 +84,10 @@ public class Main implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 					if (!leaveActionbar && actionBar != null)
 						actionBar.setPadding(left_margin, top_margin,
 								right_margin, 0);
+					Intent i = new Intent();
+					i.setComponent(new ComponentName("com.hamzah.onehandmode", "com.hamzah.onehandmode.OverlayService"));
+					if(pref_apps.getBoolean(Keys.SHOW_OVERLAY, true));
+						activity.startService(i);
 				} else {
 					// if disabled, set padding to zero, this means you dont
 					// have to restart app to set it but has bad side effects on
@@ -89,6 +95,10 @@ public class Main implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 					rootLayer.setPadding(0, 0, 0, 0);
 					if (actionBar != null)
 						actionBar.setPadding(0, 0, 0, 0);
+					Intent i = new Intent();
+					i.setComponent(new ComponentName("com.hamzah.onehandmode", "com.hamzah.onehandmode.OverlayService"));
+					if(pref_apps.getBoolean(Keys.SHOW_OVERLAY, true));
+						activity.stopService(i);
 				}
 			}
 		});

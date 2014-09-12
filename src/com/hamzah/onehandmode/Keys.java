@@ -23,4 +23,7 @@ public class Keys {
 	
 	public static final String DEFAULT_TOGGLE = "default_toggle";
 	
+	public static final String OVERLAY_COLOR = "overlay_colour";
+	public static final String SHOW_OVERLAY = "show_overlay";
+	
 }

@@ -3,6 +3,7 @@ package com.hamzah.onehandmode;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Point;
@@ -162,8 +163,13 @@ public class MainActivity extends Activity {
     	editor.putInt(Keys.TOP_MARGIN, top_margin);
     	editor.putInt(Keys.BOTTOM_MARGIN, bottom_margin);
     	editor.putBoolean(Keys.LEAVE_ACTIONBAR, leave_actionbar);
-    	editor.putBoolean(Keys.MOVE_STATUSBAR, move_statusbar);
+    	//editor.putBoolean(Keys.MOVE_STATUSBAR, move_statusbar);
     	editor.apply();
+    	
+    	if(master_switch)
+			startService(new Intent(this, OverlayService.class));
+		else
+			stopService(new Intent(this, OverlayService.class));
     	
     	Toast.makeText(this, "Changes applied!", Toast.LENGTH_SHORT).show();	
 	}

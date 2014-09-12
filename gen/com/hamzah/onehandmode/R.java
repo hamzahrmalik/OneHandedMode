@@ -9,7 +9,9 @@ package com.hamzah.onehandmode;
 
 public final class R {
     public static final class array {
+        public static final int colours=0x7f070002;
         /**  arrays 
+ arrays 
          */
         public static final int presets=0x7f070000;
         public static final int toggle_option=0x7f070001;
@@ -48,11 +50,13 @@ public final class R {
         public static final int left_margin_NC=0x7f090018;
         public static final int master_switch_NC=0x7f090016;
         public static final int master_switch_apps=0x7f090004;
+        public static final int overlay_colour=0x7f090027;
         public static final int presets_NC=0x7f09001b;
         public static final int presets_apps=0x7f09000e;
         public static final int right_margin=0x7f090008;
         public static final int right_margin_NC=0x7f090017;
         public static final int show_notification=0x7f090020;
+        public static final int show_overlay=0x7f090026;
         public static final int show_toggle_toast=0x7f090025;
         public static final int tableRow1=0x7f09001f;
         public static final int tableRow2=0x7f090021;
@@ -65,15 +69,15 @@ public final class R {
         public static final int textView5=0x7f09001d;
         public static final int textView6=0x7f090006;
         public static final int textView8=0x7f09000c;
-        public static final int toggle_activity_option=0x7f090026;
+        public static final int toggle_activity_option=0x7f090028;
         public static final int top_margin=0x7f090007;
         public static final int top_margin_NC=0x7f090019;
         public static final int transparent_notification=0x7f090023;
         public static final int welcome=0x7f090011;
-        public static final int widget_toggle_NC=0x7f090028;
-        public static final int widget_toggle_app=0x7f090027;
+        public static final int widget_toggle_NC=0x7f09002a;
+        public static final int widget_toggle_app=0x7f090029;
         public static final int widget_toggle_apps=0x7f09001e;
-        public static final int widget_toggle_both=0x7f090029;
+        public static final int widget_toggle_both=0x7f09002b;
     }
     public static final class layout {
         public static final int activity_about=0x7f030000;
@@ -89,6 +93,7 @@ public final class R {
     public static final class string {
         public static final int KeepActionbar=0x7f060014;
         /**  options 
+ options 
          */
         public static final int NotificationOption=0x7f060013;
         public static final int Presets_info=0x7f060029;
@@ -96,6 +101,7 @@ public final class R {
         public static final int about=0x7f06002d;
         public static final int activity_toggle_option=0x7f060018;
         /**  titles 
+ titles 
          */
         public static final int app_name=0x7f060000;
         public static final int apply=0x7f06001c;
@@ -105,23 +111,28 @@ public final class R {
         public static final int email=0x7f06001f;
         public static final int generate_log=0x7f060020;
         /**  help and about 
+ help and about 
          */
         public static final int help=0x7f06002c;
         /**  info and welcomes 
+ info and welcomes 
          */
         public static final int info=0x7f060025;
         public static final int info_notificationCenter=0x7f06002a;
         public static final int left=0x7f06000f;
         /**  margins 
+ margins 
          */
         public static final int left_margin=0x7f06000b;
         /**  masters 
+ masters 
          */
         public static final int master_switch=0x7f060008;
         public static final int master_switch_NC=0x7f06000a;
         public static final int master_switch_apps=0x7f060009;
         public static final int moveNotif=0x7f060017;
         /**  menu items and actions 
+ menu items and actions
          */
         public static final int report=0x7f060019;
         public static final int report_info=0x7f060027;
@@ -129,6 +140,7 @@ public final class R {
         public static final int right=0x7f060010;
         public static final int right_margin=0x7f06000c;
         public static final int save=0x7f06001b;
+        public static final int show_overlay=0x7f06002e;
         public static final int show_toast=0x7f060015;
         public static final int title_activity_about=0x7f060007;
         public static final int title_activity_help=0x7f060002;
@@ -139,6 +151,7 @@ public final class R {
         public static final int title_activity_settings=0x7f060004;
         public static final int toggle_NC=0x7f060023;
         /**  toggle names 
+ toggle names 
          */
         public static final int toggle_apps=0x7f060022;
         public static final int toggle_both=0x7f060024;

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 public class Menu extends Activity {
@@ -14,10 +13,6 @@ public class Menu extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu);
 		Settings.initNotification(this);
-		
-		int i = this.getApplicationContext().getApplicationInfo().theme;
-		String s = Integer.toString(i);
-		Log.d("OHM THEME", s);
 	}
 	
 	public void apps(View v){

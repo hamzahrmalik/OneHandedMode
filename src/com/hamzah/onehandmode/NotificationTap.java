@@ -2,6 +2,7 @@ package com.hamzah.onehandmode;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -40,7 +41,8 @@ public class NotificationTap extends Activity {
 		@SuppressWarnings("deprecation")
 		SharedPreferences pref = getSharedPreferences("apps", Context.MODE_WORLD_READABLE);
 		Editor editor = pref.edit();
-		editor.putBoolean(Keys.MASTER_SWITCH, !pref.getBoolean(Keys.MASTER_SWITCH, false));
+		boolean on = pref.getBoolean(Keys.MASTER_SWITCH, false);
+		editor.putBoolean(Keys.MASTER_SWITCH, !on);
 		editor.apply();
 	}
 	

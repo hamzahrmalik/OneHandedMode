@@ -3,6 +3,9 @@
     <issue id="ButtonStyle">
         <ignore path="res/layout/widget.xml" />
     </issue>
+    <issue id="RtlHardcoded">
+        <ignore path="src/com/hamzah/onehandmode/OverlayService.java" />
+    </issue>
     <issue id="SdCardPath" severity="ignore" />
     <issue id="WorldReadableFiles" severity="ignore" />
 </lint>
