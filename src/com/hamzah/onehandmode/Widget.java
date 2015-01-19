@@ -1,5 +1,7 @@
 package com.hamzah.onehandmode;
 
+import com.hamzah.onehandmode.activities.NotificationTap;
+
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;

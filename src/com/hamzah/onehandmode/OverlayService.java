@@ -35,7 +35,7 @@ public class OverlayService extends Service {
 		
 		SharedPreferences pref_main = this.getApplicationContext()
 				.getSharedPreferences("pref", Context.MODE_WORLD_READABLE);
-		if (pref_main.getBoolean(Keys.SHOW_OVERLAY, true)) {
+		if (pref_main.getBoolean(Keys.SHOW_OVERLAY, false)) {
 
 			DisplayMetrics metrics = getApplicationContext().getResources()
 					.getDisplayMetrics();

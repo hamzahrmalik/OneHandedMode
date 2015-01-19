@@ -1,6 +1,5 @@
-package com.hamzah.onehandmode;
+package com.hamzah.onehandmode.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,20 +7,21 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class Settings extends Activity {
-	
-	CheckBox CB_show_notification, CB_show_toast, CB_transparent_notification, CB_show_overlay;
+import com.hamzah.onehandmode.Keys;
+import com.hamzah.onehandmode.NotifService;
+import com.hamzah.onehandmode.R;
+
+public class Settings extends OHMActivity {
+
+	CheckBox CB_show_notification, CB_show_toast, CB_transparent_notification,
+			CB_show_overlay;
 	Spinner spinner_toggle_option, spinner_overlay_colour;
-	boolean show_toggle_toast = true;
-	boolean show_notification = true;
-	boolean transparent_notification = false;
-	boolean show_overlay = true;
-	int toggle_option;
-	String overlay_colour;
-	
+	EditText ET_dpi;
+
 	SharedPreferences pref;
 
 	@SuppressWarnings("deprecation")
@@ -29,35 +29,31 @@ public class Settings extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
-		
-		pref = getSharedPreferences("pref", Context.MODE_WORLD_READABLE);
-		
-    	CB_show_notification = (CheckBox) findViewById(R.id.show_notification);
-    	CB_show_toast= (CheckBox) findViewById(R.id.show_toggle_toast);
-    	CB_transparent_notification = (CheckBox) findViewById(R.id.transparent_notification);
-    	CB_show_overlay = (CheckBox) findViewById(R.id.show_overlay);
-    	
-    	spinner_toggle_option = (Spinner) findViewById(R.id.toggle_activity_option);
+
+		pref = getSharedPreferences("apps", Context.MODE_WORLD_READABLE);
+
+		CB_show_notification = (CheckBox) findViewById(R.id.show_notification);
+		CB_show_toast = (CheckBox) findViewById(R.id.show_toggle_toast);
+		CB_transparent_notification = (CheckBox) findViewById(R.id.transparent_notification);
+		CB_show_overlay = (CheckBox) findViewById(R.id.show_overlay);
+
+		spinner_toggle_option = (Spinner) findViewById(R.id.toggle_activity_option);
 		spinner_overlay_colour = (Spinner) findViewById(R.id.overlay_colour);
-    	
+
+		ET_dpi = (EditText) findViewById(R.id.dpi_option);
+
 		loadPreviousSettings();
 	}
 	
 	public void apply(View view){
-    	show_notification = CB_show_notification.isChecked();
-    	show_toggle_toast = CB_show_toast.isChecked();
-    	transparent_notification = CB_transparent_notification.isChecked();
-    	show_overlay = CB_show_overlay.isChecked();
-    	toggle_option = spinner_toggle_option.getSelectedItemPosition();
-		overlay_colour = HexFromID(spinner_overlay_colour.getSelectedItemPosition());
-    	
     	Editor editor = pref.edit();
-    	editor.putBoolean(Keys.SHOW_NOTIFICATION, show_notification);
-    	editor.putBoolean(Keys.SHOW_TOGGLE_TOAST, show_toggle_toast);
-    	editor.putBoolean(Keys.TRANSPARENT_NOTIFICATION, transparent_notification);
-    	editor.putBoolean(Keys.SHOW_OVERLAY, show_overlay);
-    	editor.putInt(Keys.DEFAULT_TOGGLE, toggle_option);
-		editor.putString(Keys.OVERLAY_COLOR, overlay_colour);
+    	editor.putBoolean(Keys.SHOW_NOTIFICATION, CB_show_notification.isChecked());
+    	editor.putBoolean(Keys.SHOW_TOGGLE_TOAST, CB_show_toast.isChecked());
+    	editor.putBoolean(Keys.TRANSPARENT_NOTIFICATION, CB_transparent_notification.isChecked());
+    	editor.putBoolean(Keys.SHOW_OVERLAY, CB_show_overlay.isChecked());
+    	editor.putInt(Keys.DEFAULT_TOGGLE, spinner_toggle_option.getSelectedItemPosition());
+		editor.putString(Keys.OVERLAY_COLOR, HexFromID(spinner_overlay_colour.getSelectedItemPosition()));
+		editor.putInt(Keys.REDUCE_DPI, Integer.parseInt(ET_dpi.getText().toString()));
     	editor.apply();
     	
     	Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
@@ -110,8 +106,9 @@ public class Settings extends Activity {
      	CB_show_notification.setChecked(pref.getBoolean(Keys.SHOW_NOTIFICATION, true));
     	CB_show_toast.setChecked(pref.getBoolean(Keys.SHOW_TOGGLE_TOAST, true));
     	CB_transparent_notification.setChecked(pref.getBoolean(Keys.TRANSPARENT_NOTIFICATION, false));
-    	CB_show_overlay.setChecked(pref.getBoolean(Keys.SHOW_OVERLAY, true));
+    	CB_show_overlay.setChecked(pref.getBoolean(Keys.SHOW_OVERLAY, false));
     	spinner_toggle_option.setSelection(pref.getInt(Keys.DEFAULT_TOGGLE, 2));
+    	ET_dpi.setText("" + pref.getInt(Keys.REDUCE_DPI, 0));
 	}
 	
     public static void initNotification(Context context){		

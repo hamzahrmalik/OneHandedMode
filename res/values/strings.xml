@@ -63,7 +63,7 @@
     <string name="help">One-Handed mode allows you to move all the screen content to one corner of the screen, for easy operation with one hand. This works by putting margins around the screen. For example, setting a left margin of 50 will indent everything 50px. You can use a preset if you prefer.\n There are separate settings pages for "Apps" and "Notification Centre" margins\n\nTerminology\n
         Notification Centre - The panel that appears when swiping down from statusbar\n
         Statusbar - The black bar across the top of the screen containing clock, battery, signal etc\n
-        Actionbar - A bar found in most apps, contains title and key controls. On this app, it is black, and says "Help" right now\n
+        Actionbar - A bar found in most apps, contains title and key controls. On this app, it is purple, and says "Help" right now\n
         XDA - An awesome forum</string>
     <string name="about">This app was made and is maintained by @hamzahrmalik on XDA. If you like the app, please rate it on the Play Store to help me out! If you really like it, buy the premium version!</string>
 
@@ -96,5 +96,7 @@
     </string-array>
 
     <string name="show_overlay">Show solid background around apps once shrunk</string>
+
+    <string name="dpi_info">You can enter a DPI value to be used while in onehandmode or enter 0 to use normal DPI</string>
 
 </resources>

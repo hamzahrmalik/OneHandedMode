@@ -1,5 +1,8 @@
 package com.hamzah.onehandmode;
 
+import com.hamzah.onehandmode.activities.Menu;
+import com.hamzah.onehandmode.activities.NotificationTap;
+
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;

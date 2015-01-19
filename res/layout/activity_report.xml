@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context="${packageName}.${activityClass}" >
 
     <TextView
@@ -41,7 +42,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView3"
         android:layout_marginTop="46dp"
-        android:text="@string/generate_log"
-        android:onClick="generate" />
+        android:onClick="generate"
+        android:text="@string/generate_log" />
 
 </RelativeLayout>

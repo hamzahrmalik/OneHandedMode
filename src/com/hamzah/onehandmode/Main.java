@@ -1,9 +1,12 @@
 package com.hamzah.onehandmode;
 
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
+import static de.robv.android.xposed.XposedHelpers.*;
 import android.app.Activity;
+import android.app.AndroidAppHelper;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.os.Build;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -44,6 +47,33 @@ public class Main implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 						}
 					});
 		}
+		if (Build.VERSION.SDK_INT < 17) {
+			findAndHookMethod(Display.class, "init", int.class,
+					new XC_MethodHook() {
+						@Override
+						protected void afterHookedMethod(MethodHookParam param)
+								throws Throwable {
+							int dpi = pref_apps.getInt(Keys.REDUCE_DPI, 0);
+							if (dpi != 0)
+								setFloatField(param.thisObject, "mDensity", dpi);
+						};
+					});
+		} else {
+			findAndHookMethod(Display.class, "updateDisplayInfoLocked",
+					new XC_MethodHook() {
+						@Override
+						protected void afterHookedMethod(MethodHookParam param)
+								throws Throwable {
+							int dpi = pref_apps.getInt(Keys.REDUCE_DPI, 0);
+							if (dpi != 0) {
+								Object mDisplayInfo = getObjectField(
+										param.thisObject, "mDisplayInfo");
+								setIntField(mDisplayInfo, "logicalDensityDpi",
+										dpi);
+							}
+						};
+					});
+		}
 		findAndHookMethod(Activity.class, "onResume", new XC_MethodHook() {
 			@Override
 			protected void afterHookedMethod(MethodHookParam param)
@@ -62,7 +92,7 @@ public class Main implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 				View actionBar = v.findViewById(resId);
 
 				pref_apps.reload();
-				if (pref_apps.getBoolean(Keys.MASTER_SWITCH, false)) {
+				if (pref_apps.getBoolean("master_switch", false)) {
 					// get all prefs
 					left_margin = pref_apps.getInt(Keys.LEFT_MARGIN, 0);
 					right_margin = pref_apps.getInt(Keys.RIGHT_MARGIN, 0);
@@ -85,9 +115,11 @@ public class Main implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 						actionBar.setPadding(left_margin, top_margin,
 								right_margin, 0);
 					Intent i = new Intent();
-					i.setComponent(new ComponentName("com.hamzah.onehandmode", "com.hamzah.onehandmode.OverlayService"));
-					if(pref_apps.getBoolean(Keys.SHOW_OVERLAY, true));
-						activity.startService(i);
+					i.setComponent(new ComponentName("com.hamzah.onehandmode",
+							"com.hamzah.onehandmode.OverlayService"));
+					if (pref_apps.getBoolean(Keys.SHOW_OVERLAY, true))
+						;
+					activity.startService(i);
 				} else {
 					// if disabled, set padding to zero, this means you dont
 					// have to restart app to set it but has bad side effects on
@@ -96,9 +128,11 @@ public class Main implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 					if (actionBar != null)
 						actionBar.setPadding(0, 0, 0, 0);
 					Intent i = new Intent();
-					i.setComponent(new ComponentName("com.hamzah.onehandmode", "com.hamzah.onehandmode.OverlayService"));
-					if(pref_apps.getBoolean(Keys.SHOW_OVERLAY, true));
-						activity.stopService(i);
+					i.setComponent(new ComponentName("com.hamzah.onehandmode",
+							"com.hamzah.onehandmode.OverlayService"));
+					if (pref_apps.getBoolean(Keys.SHOW_OVERLAY, true))
+						;
+					activity.stopService(i);
 				}
 			}
 		});

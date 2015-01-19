@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hamzah.onehandmode"
-    android:versionCode="19"
-    android:versionName="2.3" >
+    android:versionCode="20"
+    android:versionName="2.4" >
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -27,19 +27,13 @@
         <meta-data
             android:name="xposeddescription"
             android:value="Move all content to a configurable portion of the screen for easy usage with one hand on phablet devices" />
-		<receiver android:name="Widget" >
-            <intent-filter>
-               <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-               android:resource="@xml/widget" />
-         </receiver>
+
         <activity
-            android:name="com.hamzah.onehandmode.About"
+            android:name="com.hamzah.onehandmode.activities.About"
             android:label="@string/title_activity_about" >
         </activity>
         <activity
-            android:name="com.hamzah.onehandmode.Menu"
+            android:name="com.hamzah.onehandmode.activities.Menu"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,40 +42,37 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.hamzah.onehandmode.Settings"
+            android:name="com.hamzah.onehandmode.activities.Settings"
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name="com.hamzah.onehandmode.MainActivity"
+            android:name="com.hamzah.onehandmode.activities.MainActivity"
             android:label="@string/title_activity_main"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.hamzah.onehandmode.Help"
+            android:name="com.hamzah.onehandmode.activities.Help"
             android:label="@string/title_activity_help" >
         </activity>
         <activity
-            android:name="com.hamzah.onehandmode.NotificationTap"
+            android:name="com.hamzah.onehandmode.activities.NotificationTap"
             android:label="@string/title_activity_notification_tap"
-            android:theme="@style/Theme.Transparent"
-            android:noHistory= "true" >
+            android:noHistory="true"
+            android:theme="@style/Theme.Transparent" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name="com.hamzah.onehandmode.NotifService"
-            android:enabled="true"
-            android:exported="true" >
-        </service>
-        <service
-            android:name="com.hamzah.onehandmode.OverlayService"
-            android:enabled="true"
-            android:exported="true" >
-        </service>
+        <activity
+            android:name="com.hamzah.onehandmode.activities.NotificationCentre"
+            android:label="@string/title_activity_notification_centre" >
+        </activity>
+        <activity
+            android:name="com.hamzah.onehandmode.activities.Report"
+            android:label="@string/title_activity_report" >
+        </activity>
 
         <receiver
             android:name="com.hamzah.onehandmode.BootStartupReciever"
@@ -94,14 +85,26 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name="com.hamzah.onehandmode.NotificationCentre"
-            android:label="@string/title_activity_notification_centre" >
-        </activity>
-        <activity
-            android:name="com.hamzah.onehandmode.Report"
-            android:label="@string/title_activity_report" >
-        </activity>
+        <service
+            android:name="com.hamzah.onehandmode.NotifService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service
+            android:name="com.hamzah.onehandmode.OverlayService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <receiver android:name="Widget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget" />
+        </receiver>
     </application>
 
 </manifest>

@@ -26,4 +26,6 @@ public class Keys {
 	public static final String OVERLAY_COLOR = "overlay_colour";
 	public static final String SHOW_OVERLAY = "show_overlay";
 	
+	public static final String REDUCE_DPI = "reduce_dpi";
+	
 }

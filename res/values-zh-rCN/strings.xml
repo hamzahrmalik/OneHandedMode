@@ -1,98 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>   
     
-    <!-- titles -->
-    <string name="app_name">单手模式</string>
-    <string name="title_activity_main">应用设置</string>
-    <string name="title_activity_help">帮助</string>
-    <string name="title_activity_notification_tap">单手模式切换</string>
-    <string name="title_activity_settings">设置</string>
-    <string name="title_activity_notification_centre">通知中心设置</string>
-    <string name="title_activity_report">反馈</string>
-    <string name="title_activity_about">关于</string>
+     <!-- titles -->
+    <string name="app_name">OneHand Mode</string>
+    <string name="title_activity_main">Settings for Apps</string>
+    <string name="title_activity_help">Help</string>
+    <string name="title_activity_notification_tap">OneHand Toggle</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_notification_centre">Settings for Notification Centre</string>
+    <string name="title_activity_report">Report</string>
+    <string name="title_activity_about">About</string>
     
     <!-- masters -->
-    <string name="master_switch">总开关</string>
-    <string name="master_switch_apps">为应用启用单手模式</string>
-    <string name="master_switch_NC">为通知中心启用单手模式</string>
+    <string name="master_switch">Master Switch</string>
+    <string name="master_switch_apps">Enable OneHand Mode for apps</string>
+    <string name="master_switch_NC">Enable OneHand Mode for Notification Centre</string>
     
     <!-- margins -->
-    <string name="left_margin">左边距</string>
-    <string name="right_margin">右边距</string>
-    <string name="top_margin">上边距</string>
-    <string name="bottom_margin">下边距</string>
-    <string name="left">左</string>
-    <string name="right">右</string>
-    <string name="top">上</string>
-    <string name="bottom">下</string>
+    <string name="left_margin">Left Margin</string>
+    <string name="right_margin">Right Margin</string>
+    <string name="top_margin">Top Margin</string>
+    <string name="bottom_margin">Bottom Margin</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="top">Top</string>
+    <string name="bottom">Bottom</string>
     
     <!-- options -->
-    <string name="NotificationOption">显示切换状态的通知</string>
-    <string name="KeepActionbar">让 Action Bar 留在原地</string>
-    <string name="show_toast">切换时弹出提示</string>
-    <string name="trans_notif">透明化通知栏图标</string>
-    <string name="moveNotif">移动通知中心</string>
-    <string name="activity_toggle_option">“单手模式切换”应该切换哪个？</string>
+    <string name="NotificationOption">Show notification for toggling</string>
+    <string name="KeepActionbar">Leave actionbar in normal position</string>
+    <string name="show_toast">Show Toast when toggling</string>
+    <string name="trans_notif">Transparent Notification Icon</string>
+    <string name="moveNotif">Move Notification Center</string>
+    <string name="activity_toggle_option">What should the Toggle Activity toggle?</string>
     
    	<!-- menu items and actions-->
-    <string name="report">反馈问题</string>
-    <string name="XDA">查看 XDA 论坛的发布贴</string>
-    <string name="save">保存</string>
-    <string name="apply">应用</string>
-    <string name="twitter">在 Twitter 上 \@hamzahrmalik</string>
-    <string name="website">访问我的网站！</string>
+    <string name="report">Report a problem</string>
+    <string name="XDA">Visit XDA Thread</string>
+    <string name="save">Save</string>
+    <string name="apply">Apply</string>
+    <string name="twitter">\@hamzahrmalik on Twitter</string>
+    <string name="website">Visit my website!</string>
     <string name="email">hamzahrmalik@outlook.com</string>
-    <string name="generate_log">生成日志文件</string>
-    <string name="buyPrem">从 Google Play 购买高级版</string>
+    <string name="generate_log">Generate log file</string>
+    <string name="buyPrem">Buy premium from Google Play</string>
     
     <!-- toggle names -->
-    <string name="toggle_apps">应用</string>
-    <string name="toggle_NC">通知中心</string>
-    <string name="toggle_both">都切换</string>
-	
+    <string name="toggle_apps">Apps</string>
+    <string name="toggle_NC">NC</string>
+    <string name="toggle_both">Both</string>
+    
     <!-- info and welcomes -->
-    <string name="info">单手模式依靠增加屏幕内容的边距来作用。请在下面设置边距</string>
-    <string name="welcome">欢迎来到单手模式，请选择一项操作</string> 
-	<string name="report_info">点击下面的按钮后，会在您的手机内存生成一个文件。这个文件包含了系统日志和系统名称。您可以通过电子邮件或在 XDA 论坛上回帖来把这个文件发送给我。电子邮件地址是：</string>
-    <string name="wait">请稍候</string>
-    <string name="Presets_info">或者你也可以选择预先设置好的方案</string>
-    <string name="info_notificationCenter">设置通知中心的边距</string>
-    <string name="report_info_2">请在这里反馈本应用发生的问题。在反馈之前，请确定您已经阅读了帮助页面和在 XDA 论坛上的发布贴</string>
+    <string name="info">One-Handed mode works by putting margins around the screen. Please specifiy your preferred margins below in pixels</string>
+    <string name="welcome">Welcome to One Hand Mode. Please select an item</string> <string name="report_info">The button below will generate a file onto your phones memory. This file will contain a log and your phone and ROM names. You can send me this file either by email or on the XDA thread. Email address is:</string>
+    <string name="wait">Please Wait</string>
+    <string name="Presets_info">Optionally, choose a ready made preset</string>
+    <string name="info_notificationCenter">Specifiy margins for Notification Centre</string>
+    <string name="report_info_2">Use this screen to report a problem with the app. Please make sure you have read both the help page and the XDA thread first</string>
         
     <!-- help and about -->
-    <string name="help">单手模式允许您移动屏幕上的所有内容到一个易于单手操作的角落。单手模式依靠增加屏幕内容的边距来作用。例如，设置 50 像素的左边距会让屏幕上的元素往右偏 50 像素。如果你喜欢，你也可以使用预设好的方案。\n主界面上有为“应用”和“通知中心”分别设置的单独设置页面。\n\n一些术语：\n
-        通知中心——可以从状态栏拉下来显示通知的那块面板\n
-        状态栏——整块屏幕上最顶上的、有着时钟、电池、信号信息的黑色长条\n
-        Action Bar——你可以在很多应用里找到它，它会显示应用的名称和一些操作按钮。在本应用里面，Action Bar 是黑色的，并且显示“帮助”\n
-        XDA 论坛——国外的一个牛逼哄哄的技术类交流论坛</string>
-    <string name="about">感谢您尝试高级版！\\n本应用由 XDA 的 @hamzahrmalik 开发和维护。如果您喜欢本应用，请支持高级版并在 Google Play 上评价！</string>
+    <string name="help">One-Handed mode allows you to move all the screen content to one corner of the screen, for easy operation with one hand. This works by putting margins around the screen. For example, setting a left margin of 50 will indent everything 50px. You can use a preset if you prefer.\n There are separate settings pages for "Apps" and "Notification Centre" margins\n\nTerminology\n
+        Notification Centre - The panel that appears when swiping down from statusbar\n
+        Statusbar - The black bar across the top of the screen containing clock, battery, signal etc\n
+        Actionbar - A bar found in most apps, contains title and key controls. On this app, it is black, and says "Help" right now\n
+        XDA - An awesome forum</string>
+    <string name="about">Thanks for trying Premium!\\nThis app was made and is maintained by @hamzahrmalik on XDA. If you like the app, which you probably do if your bought premium, please rate it on the Play Store to help me out!</string>
 	
 	<!-- arrays -->
     <string-array name="presets">
-        <item name="none">无</item>
-        <item name="bottom_right">右下</item>
-        <item name="bottom_left">左下</item>
-        <item name="bottom_right_big">右下（大）</item>
-        <item name="bottom_left_big">左下（大）</item>
-        <item name="bottom_middle">中下</item>
-        <item name="squash_down">向下压缩</item>
+        <item name="none">None</item>
+        <item name="bottom_right">Bottom Right</item>
+        <item name="bottom_left">Bottom Left</item>
+        <item name="bottom_right_big">Bottom Right Big</item>
+        <item name="bottom_left_big">Bottom Left Big</item>
+        <item name="bottom_middle">Bottom Middle</item>
+        <item name="squash_down">Squash down</item>
     </string-array>
     <string-array name="toggle_option">
-        <item name="apps">应用</item>
-        <item name="NC">通知中心</item>
-        <item name="both">都切换</item>
-    </string-array>
-	<string-array name="colours">
-        <item name="red">红</item>
-        <item name="green">绿</item>
-        <item name="blue">蓝</item>
-        <item name="lblue">天蓝</item>
-        <item name="orange">橙</item>
-        <item name="yellow">黄</item>
-        <item name="purple">紫</item>
-        <item name="white">白</item>
-        <item name="black">黑</item>
-        <item name="grey">灰</item>
+        <item name="apps">Apps</item>
+        <item name="NC">Notification Centre</item>
+        <item name="both">Both</item>
     </string-array>
 
 </resources>

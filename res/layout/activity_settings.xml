@@ -1,54 +1,27 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentTop="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context="${packageName}.${activityClass}" >
 
-    <TableRow
-        android:id="@+id/tableRow1"
+    <CheckBox
+        android:id="@+id/show_notification"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:text="@string/NotificationOption" />
 
-        <CheckBox
-            android:id="@+id/show_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/NotificationOption" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow2"
+    <CheckBox
+        android:id="@+id/transparent_notification"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </TableRow>
+        android:layout_height="wrap_content"
+        android:text="@string/trans_notif" />
 
-    <TableRow
-        android:id="@+id/tableRow3"
+    <CheckBox
+        android:id="@+id/show_toggle_toast"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <CheckBox
-            android:id="@+id/transparent_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/trans_notif" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <CheckBox
-            android:id="@+id/show_toggle_toast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/show_toast" />
-    </TableRow>
+        android:layout_height="wrap_content"
+        android:text="@string/show_toast" />
 
     <CheckBox
         android:id="@+id/show_overlay"
@@ -75,6 +48,23 @@
         android:layout_height="wrap_content"
         android:entries="@array/toggle_option"
         android:prompt="@string/activity_toggle_option" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dpi_info"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/dpi_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
 
     <Button
         android:id="@+id/apply_settings"
